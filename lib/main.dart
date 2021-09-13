@@ -1,5 +1,9 @@
-import 'package:calendar/screens/hijiri_calendar.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/hijiri_calendar.dart';
+import 'components/drawer.dart';
+import 'config/constants.dart';
+import 'config/theme.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,13 +15,15 @@ static final String title = 'Hijiri Calendar made \nJustifiedTech(Kcslim)';
   Widget build(BuildContext context) {
     return MaterialApp(
       title: title,
+      theme: themeData(),
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: Colors.black12,
-        accentColor: Colors.deepOrangeAccent,
-        primaryColor: Colors.deepOrange,
+        scaffoldBackgroundColor: kPrimaryDarkColor,
+        accentColor: kAccentColor,
+        primaryColor: kPrimaryColor,
       
-      ),
+        
+     ),
       home: MainPage(),
     );
   }
@@ -28,21 +34,25 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SafeArea(
     child: Scaffold(
+      drawer: MyDrawer(),
       floatingActionButton: FloatingActionButton(child: Icon(Icons.add_task_outlined),
-      backgroundColor: Colors.deepOrange,
-      foregroundColor: Colors.white,
+      backgroundColor: kPrimaryColor,
+      foregroundColor: kPrimaryLightColor,
       onPressed: ()=>{}, ),
       appBar: AppBar(centerTitle: true, 
       title: Text(MyApp.title, style: TextStyle(fontSize: 14),),
-      leading: Icon(Icons.settings),
       actions: [
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Icon(Icons.add_task_rounded),
         )
-      ],),
+      ],
+    
+      ),
       body: HijiriCalendar(),
+      
     ),
   );
    
 }
+

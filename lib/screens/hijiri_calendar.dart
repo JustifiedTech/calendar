@@ -1,6 +1,7 @@
 
+import 'package:calendar/config/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:syncfusion_flutter_core/core.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class HijiriCalendar extends StatefulWidget {
@@ -26,22 +27,22 @@ elevation: 10,
         showNavigationArrow: true,
         // showActionButtons: true,
         controller: _controller,
-        selectionMode: DateRangePickerSelectionMode.multiple,
+        selectionMode: DateRangePickerSelectionMode.single,
         selectionShape: DateRangePickerSelectionShape.circle,
         viewSpacing: 30,
         minDate: HijriDateTime(1440, 02, 05),
-        maxDate: HijriDateTime(1443, 12, 05),
+        maxDate: HijriDateTime(1448, 12, 05),
         monthViewSettings: HijriDatePickerMonthViewSettings(
         showWeekNumber: true,
         specialDates: <HijriDateTime>[
           HijriDateTime.now().add(Duration(days: 2)),
-          HijriDateTime.now().add(Duration(days: 5)),
+          HijriDateTime.now().add(Duration(days: 25)),
           HijriDateTime.now().add(Duration(days: 7)),
           HijriDateTime.now().add(Duration(days: 16))
         ],
         weekNumberStyle: DateRangePickerWeekNumberStyle(
                 textStyle: TextStyle(fontStyle: FontStyle.italic),
-                backgroundColor: Colors.deepOrange),
+                backgroundColor: kPrimaryColor),
                  dayFormat: 'EEE',
                     viewHeaderStyle: DateRangePickerViewHeaderStyle(backgroundColor: Color(0xFF000F1F))),
                 headerStyle:
