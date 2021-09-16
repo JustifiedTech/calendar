@@ -1,13 +1,10 @@
-import 'package:flutter/material.dart';
+import '../config/import.dart';
 
-const kPrimaryColor = Colors.deepPurple;
-const kAccentColor = Color(0xFFFF7643);
+const kPrimaryColor = Color(0xFFFF0266);
+const kAccentColor = Color(0xFFFF7597);
 const kPrimaryLightColor = Color(0xFFFFECDF);
-const kPrimaryGradientColor = LinearGradient(
-  colors: [Color(0xFFFFA53E), Color(0xFFFF7643)],
-);
 const kPrimaryDarkColor = Colors.black12;
-const kSecondaryColor = Color(0xFF979797);
+const kSecondaryColor = Color.fromARGB(100, 250, 200, 150);
 const kTextColor = Color(0xFF302E2E);
 const kAnimationDuration = Duration(milliseconds: 200);
 const kTextTheme = Color(0xFF161515);

@@ -1,73 +1,171 @@
-import 'package:flutter/material.dart';
-import '../config/constants.dart';
-class MyDrawer extends StatelessWidget {
+import '../config/import.dart';
+
+class MyDrawer extends StatefulWidget {
 
   const MyDrawer({
     Key? key,
   }) : super(key: key);
 
   @override
+  _MyDrawerState createState() => _MyDrawerState();
+}
+
+class _MyDrawerState extends State<MyDrawer> {
+bool isTask = false;
+bool isAlarm = false;
+
+  @override
   Widget build(BuildContext context) {
-    
+
     return Drawer(
-    
-  // Add a ListView to the drawer. This ensures the user can scroll
-  // through the options in the drawer if there isn't enough vertical
-  // space to fit everything.
+
+
   child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(color: kPrimaryLightColor, icon: Icon(Icons.arrow_back_rounded), onPressed: (){
-Navigator.pop(context);
-                      },),
+                      CircleAvatar(
+                        radius: 20,
+                        child: Icon(Icons.person, size: 30,)),
+                      InkWell(child: Icon(Icons.arrow_back_sharp), onTap: ()=>{
+                        Navigator.pop(context)
+                      },)
                     ],
                   ),
+                  Text('JTech Calender', style: TextStyle(fontFamily: 'Muli', fontWeight: FontWeight.bold, fontSize: 28),),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
                     children: [
-                      Text('Logo Here'),
-                      Text('Name Here')
+                      Icon(Icons.mail, size: 14,),
+                        SizedBox(width: 10,),
+
+                      Text('JustifiedTech@gmail.com'),
+
                     ],
                   ),
-                  Text('Company Contact')
+                    Row(
+                      children: [
+                        Icon(Icons.phone, size: 14,),
+                        SizedBox(width: 10,),
+                      Text('+234-703-783-7788')
+
+                      ],
+                    ),
                 ],
               ),
               decoration: BoxDecoration(
                 color: kPrimaryColor,
               ),
             ),
-            ListTile(
-              leading: Icon(Icons.home, size: 40,),
-              title: Text('First item'),
-              subtitle: Text("This is the 1st item"),
-              trailing: Icon(Icons.more_vert),
-              onTap: () {
-              },
-            ),
-            ListTile(
-              title: Text('Second item'),
-              onTap: () {
-              },
-            ),
-            ListTile(
-              title: Text('Close the menu', style: TextStyle(color: kAccentColor, fontWeight: FontWeight.w500, fontFamily: 'Muli'),),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            )
+
+           MyListTile(icon:Icons.calendar_view_day_sharp, title: 'Day', onTap: () => {print('Day View')}, subtitle: '',),
+           MyListTile(icon:Icons.calendar_view_week_sharp, title: 'Week', subtitle: '', onTap: () => {print('week View')}),
+           MyListTile(icon:Icons.calendar_view_month_sharp, title: 'Month', subtitle: '', onTap: () => {print('month View')}),
+
+            Divider(height: 5, color: kAccentColor,),
+            Row(
+                children: [
+             Checkbox(
+                      activeColor: kPrimaryColor,
+                      value: isTask,
+                      onChanged: (val) {
+                        setState(() {
+                          isTask = val!;
+                        });
+                      },
+                    ),
+                    InkWell(
+                  onTap: () {
+                    setState(() {
+                      isTask = !isTask;
+                      if(isTask){
+                      print('Task displayed');
+                    }
+                    else{
+                      print('Task display off');
+                    }
+                    });
+
+                  },
+                  child: Text(
+                    'Tasks',
+                    style: TextStyle(
+                        fontSize:14,
+                        color: isTask == true ? kAccentColor : kPrimaryLightColor),
+                  ),
+                ),
+  ],
+),
+            Row(
+               children: [
+             Checkbox(
+                      activeColor: kPrimaryColor,
+                      value: isAlarm,
+                      onChanged: (val) {
+                        setState(() {
+                          isAlarm = val!;
+                           if(isAlarm){
+                      print('Alarm displayed');
+                    }
+                    else{
+                      print('Alarm display off');
+                    }
+                        });
+
+                      },
+                    ),
+                    InkWell(
+                  onTap: () {
+                    setState(() {
+                      isAlarm = !isAlarm;
+                    });
+                  },
+                  child: Text(
+                    'Reminder',
+                    style: TextStyle(
+                        fontSize:14,
+                        color: isAlarm == true ? kAccentColor : kPrimaryLightColor),
+                  ),
+                ),
+  ],
+),
+            Divider(height: 5, color: kAccentColor,),
+
+           MyListTile(icon:Icons.settings, title: 'Settings', subtitle: 'Display Settings',),
+
           ],
         ),
-      
+
 );
+  }
+}
+
+class MyListTile extends StatelessWidget {
+  const MyListTile({
+    Key? key, required this.icon, this.subtitle, this.title, this.onTap
+  }) : super(key: key);
+
+  final String? title, subtitle;
+  final IconData icon;
+  final Function()? onTap;
+
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(icon,),
+       title: Text(title!, style: TextStyle(fontFamily:'Muli', fontSize: 16,  fontWeight: FontWeight.bold),),
+       subtitle: Text(subtitle!, style: TextStyle(fontSize: 12),),
+      //  trailing: Icon(Icons.arrow_drop_down),
+onTap: onTap,
+     );
   }
 }

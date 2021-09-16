@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
-import './constants.dart';
+import '../config/import.dart';
+
 
 ThemeData themeData() {
   return ThemeData(
@@ -8,7 +8,9 @@ ThemeData themeData() {
       appBarTheme: appBarTheme(),
       inputDecorationTheme: inputDecorationTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      primarySwatch: kPrimaryColor,
+      scaffoldBackgroundColor: kPrimaryDarkColor,
+      accentColor: kAccentColor,
+      primaryColor: kPrimaryColor,
       );
 }
 
@@ -39,6 +41,7 @@ InputDecorationTheme inputDecorationTheme() {
 
 AppBarTheme appBarTheme() {
   return AppBarTheme(
+
       elevation: 0,
       color: Colors.white,
       brightness: Brightness.light,
@@ -46,13 +49,16 @@ AppBarTheme appBarTheme() {
         color: kTextTheme,
       ),
       textTheme: TextTheme(
+
           headline6: TextStyle(
+            fontFamily: 'Muli',
               color: kTextTheme, fontSize: 20, fontWeight: FontWeight.bold)));
 }
 
 TextTheme textTheme() {
   return TextTheme(
-    bodyText1: TextStyle(color: kTextColor),
-    bodyText2: TextStyle(color: kTextColor),
+
+    bodyText1: TextStyle(color: kTextColor, fontFamily: 'Muli'),
+    bodyText2: TextStyle(color: kTextColor, fontFamily: 'Muli'),
   );
 }

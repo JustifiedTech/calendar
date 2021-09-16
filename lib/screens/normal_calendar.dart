@@ -1,7 +1,5 @@
 
-import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_calendar/calendar.dart';
-
+import '../config/import.dart';
 class MyCalendar extends StatefulWidget {
   MyCalendar({Key? key}) : super(key: key);
 
@@ -17,6 +15,7 @@ class _MyCalendarState extends State<MyCalendar> {
       initialSelectedDate: DateTime.now(),
       cellBorderColor: Colors.transparent,
       showCurrentTimeIndicator: true,
+
       showNavigationArrow: true,
       showDatePickerButton: true,
       showWeekNumber: true,
@@ -24,3 +23,13 @@ weekNumberStyle: WeekNumberStyle(backgroundColor: Colors.deepOrange,textStyle: T
     );
 }
 }
+
+
+
+
+
+
+
+
+
+
