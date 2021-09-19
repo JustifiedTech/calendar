@@ -1,3 +1,4 @@
+
 import '../config/import.dart';
 
 class MyFLoatButton extends StatefulWidget {
@@ -76,7 +77,7 @@ class _MyFLoatButtonState extends State<MyFLoatButton> with SingleTickerProvider
                         color: Colors.white,
                       ),
                       onClick: (){
-                        print('First Button');
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>AddTask()));
                       },
                     ),
                   ),

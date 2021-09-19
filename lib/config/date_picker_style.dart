@@ -6,18 +6,12 @@ import 'import.dart';
    ];
 
 
-DateRangePickerHeaderStyle headerStyle() => DateRangePickerHeaderStyle(textStyle: TextStyle(color: kPrimaryLightColor, fontFamily: 'Muli', fontWeight:FontWeight.w500, fontSize:18));
+DateRangePickerHeaderStyle headerStyle() => DateRangePickerHeaderStyle(textStyle: TextStyle(color: kPrimaryLightColor, fontFamily: 'Muli', fontWeight:FontWeight.w500, fontSize:18, fontStyle: FontStyle.italic));
 
 HijriDatePickerMonthCellStyle monthCellStyle() {
   return HijriDatePickerMonthCellStyle(
           textStyle: TextStyle(fontFamily: 'Muli'),
           // cellDecoration: BoxDecoration(),
-
-            blackoutDatesDecoration: BoxDecoration(
-              color: Colors.red,
-              border: Border.all(color: kSecondaryColor, width: 1),
-              shape: BoxShape.circle),
-
             specialDatesDecoration: BoxDecoration(
               color: kAccentColor,
               border: Border.all(color:kAccentColor, width: 1),
@@ -39,6 +33,6 @@ HijriDatePickerMonthViewSettings monthViewSetting() {
                 // backgroundColor: kSecondaryColor
                 ),
                 dayFormat: 'EEE',
-                viewHeaderStyle: DateRangePickerViewHeaderStyle(textStyle: TextStyle(fontFamily: 'Muli', color: kPrimaryLightColor, fontWeight: FontWeight.normal, fontSize: 12))
+                viewHeaderStyle: DateRangePickerViewHeaderStyle(textStyle: TextStyle(fontFamily: 'Muli', color: kPrimaryLightColor, fontWeight: FontWeight.bold, fontSize: 12, fontStyle: FontStyle.italic,))
                 );
 }

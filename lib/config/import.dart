@@ -11,6 +11,8 @@ export '../screens/hijiri_calendar.dart';
 export '../screens/normal_calendar.dart';
 export 'package:syncfusion_flutter_core/core.dart';
 export 'package:syncfusion_flutter_datepicker/datepicker.dart';
-export 'package:syncfusion_flutter_calendar/calendar.dart';
+// export 'package:syncfusion_flutter_calendar/calendar.dart';
 export 'package:dart_style/dart_style.dart';
 export 'date_picker_style.dart';
+export 'package:table_calendar/table_calendar.dart';
+
