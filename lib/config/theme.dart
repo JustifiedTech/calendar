@@ -1,64 +1,68 @@
 import '../config/import.dart';
 
 
-ThemeData themeData() {
+class ThemeProvider extends ChangeNotifier {
+ThemeMode themeMode = ThemeMode.dark;
+
+bool get isDark => themeMode == ThemeMode.dark;
+
+}
+
+
+class MyThemes{
+
+
+ThemeData lightTheme() {
   return ThemeData(
       fontFamily: 'Muli',
-      textTheme: textTheme(),
-      appBarTheme: appBarTheme(),
-      inputDecorationTheme: inputDecorationTheme(),
+
+      // appBarTheme: appBarTheme(),
+      visualDensity: VisualDensity.adaptivePlatformDensity,
+      scaffoldBackgroundColor: Colors.white,
+      accentColor: Colors.deepOrangeAccent,
+      primaryColor: Colors.deepPurple,
+      colorScheme: ColorScheme.light(),
+      brightness: Brightness.light,
+
+      );
+}
+ThemeData darkTheme() {
+  return ThemeData(
+      fontFamily: 'Muli',
+      // textTheme: textTheme(),
+      // appBarTheme: appBarTheme(),
       visualDensity: VisualDensity.adaptivePlatformDensity,
       scaffoldBackgroundColor: kPrimaryDarkColor,
       accentColor: kAccentColor,
       primaryColor: kPrimaryColor,
+      colorScheme: ColorScheme.dark(),
+      brightness: Brightness.dark,
+      textTheme: Typography.whiteMountainView
+
+
       );
 }
 
-InputDecorationTheme inputDecorationTheme() {
-  OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(28),
-      borderSide: BorderSide(width: 1.5),
-      gapPadding: 10);
-  OutlineInputBorder errorInputBorder = OutlineInputBorder(
-    gapPadding: 10,
-    borderSide: BorderSide(
-      color: Colors.red,
-      width: 1.2,
-    ),
-    borderRadius: BorderRadius.circular(28),
-  );
-  return InputDecorationTheme(
-    floatingLabelBehavior: FloatingLabelBehavior.always,
-    contentPadding: EdgeInsets.symmetric(horizontal: 36, vertical: 20),
-    enabledBorder: outlineInputBorder,
-    focusedBorder: outlineInputBorder,
-    border: outlineInputBorder,
-    prefixStyle: TextStyle(),
-    errorBorder: errorInputBorder,
-    focusedErrorBorder: errorInputBorder
-  );
-}
+// AppBarTheme appBarTheme() {
+//   return AppBarTheme(
 
-AppBarTheme appBarTheme() {
-  return AppBarTheme(
+//       elevation: 0,
+//       brightness: Brightness.light,
+//       iconTheme: IconThemeData(
+//         color: kPrimaryLightColor,
+//       ),
+//       textTheme: TextTheme(
 
-      elevation: 0,
-      color: Colors.white,
-      brightness: Brightness.light,
-      iconTheme: IconThemeData(
-        color: kTextTheme,
-      ),
-      textTheme: TextTheme(
+//           headline6: TextStyle(
+//             fontFamily: 'Muli',
+//               color: kTextTheme, fontSize: 20, fontWeight: FontWeight.bold)));
+// }
 
-          headline6: TextStyle(
-            fontFamily: 'Muli',
-              color: kTextTheme, fontSize: 20, fontWeight: FontWeight.bold)));
-}
+// TextTheme textTheme() {
+//   return TextTheme(
 
-TextTheme textTheme() {
-  return TextTheme(
-
-    bodyText1: TextStyle(color: kTextColor, fontFamily: 'Muli'),
-    bodyText2: TextStyle(color: kTextColor, fontFamily: 'Muli'),
-  );
+//     bodyText1: TextStyle(color: kTextColor, fontFamily: 'Muli'),
+//     bodyText2: TextStyle(color: kTextColor, fontFamily: 'Muli'),
+//   );
+// }
 }

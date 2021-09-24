@@ -106,7 +106,7 @@ class _MyFLoatButtonState extends State<MyFLoatButton> with SingleTickerProvider
                   transform: Matrix4.rotationZ(getRadiansFromDegree(rotationAnimation.value)),
                   alignment: Alignment.center,
                   child: CircularButton(
-                    color: kAccentColor,
+                    color: Theme.of(context).accentColor,
                     width: 60,
                     height: 60,
                     icon: Icon(

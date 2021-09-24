@@ -35,34 +35,34 @@ bool isAlarm = false;
                       CircleAvatar(
                         radius: 20,
                         child: Icon(Icons.person, size: 30,)),
-                      InkWell(child: Icon(Icons.arrow_back_sharp), onTap: ()=>{
+                      InkWell(child: Icon(Icons.arrow_back_sharp, color:Colors.white,), onTap: ()=>{
                         Navigator.pop(context)
                       },)
                     ],
                   ),
-                  Text('JTech Calender', style: TextStyle(fontFamily: 'Muli', fontWeight: FontWeight.bold, fontSize: 28),),
+                  Text('JTech Calender', style: TextStyle( color:Colors.white, fontFamily: 'Muli', fontWeight: FontWeight.bold, fontSize: 28),),
                   Row(
 
                     children: [
-                      Icon(Icons.mail, size: 14,),
+                      Icon(Icons.mail, size: 14, color: Colors.white,),
                         SizedBox(width: 10,),
 
-                      Text('JustifiedTech@gmail.com'),
+                      Text('JustifiedTech@gmail.com', style: TextStyle(color: Colors.white),),
 
                     ],
                   ),
                     Row(
                       children: [
-                        Icon(Icons.phone, size: 14,),
+                        Icon(Icons.phone, size: 14,color: Colors.white),
                         SizedBox(width: 10,),
-                      Text('+234-703-783-7788')
+                      Text('+234-703-783-7788', style: TextStyle(color: Colors.white))
 
                       ],
                     ),
                 ],
               ),
               decoration: BoxDecoration(
-                color: kPrimaryColor,
+                color: Theme.of(context).primaryColor,
               ),
             ),
 
@@ -70,44 +70,46 @@ bool isAlarm = false;
            MyListTile(icon:Icons.calendar_view_week_sharp, title: 'Week', subtitle: '', onTap: () => {print('week View')}),
            MyListTile(icon:Icons.calendar_view_month_sharp, title: 'Month', subtitle: '', onTap: () => {print('month View')}),
 
-            Divider(height: 5, color: kAccentColor,),
-            Row(
-                children: [
-             Checkbox(
-                      activeColor: kPrimaryColor,
-                      value: isTask,
-                      onChanged: (val) {
-                        setState(() {
-                          isTask = val!;
-                        });
-                      },
-                    ),
-                    InkWell(
-                  onTap: () {
-                    setState(() {
-                      isTask = !isTask;
-                      if(isTask){
-                      print('Task displayed');
-                    }
-                    else{
-                      print('Task display off');
-                    }
-                    });
+            Divider(height: 5, color: Theme.of(context).accentColor,),
+            Container(
+              child: Row(
+                  children: [
+               Checkbox(
+                        activeColor: Theme.of(context).primaryColor,
+                        value: isTask,
+                        onChanged: (val) {
+                          setState(() {
+                            isTask = val!;
+                          });
+                        },
+                      ),
+                      InkWell(
+                    onTap: () {
+                      setState(() {
+                        isTask = !isTask;
+                        if(isTask){
+                        print('Task displayed');
+                      }
+                      else{
+                        print('Task display off');
+                      }
+                      });
 
-                  },
-                  child: Text(
-                    'Tasks',
-                    style: TextStyle(
-                        fontSize:14,
-                        color: isTask == true ? kAccentColor : kPrimaryLightColor),
+                    },
+                    child: Text(
+                      'Tasks',
+                      style: TextStyle(
+                          fontSize:14,
+                          color: isTask == true ? Theme.of(context).accentColor : Colors.white),
+                    ),
                   ),
-                ),
   ],
 ),
+            ),
             Row(
                children: [
              Checkbox(
-                      activeColor: kPrimaryColor,
+                      activeColor: Theme.of(context).primaryColor,
                       value: isAlarm,
                       onChanged: (val) {
                         setState(() {
@@ -132,7 +134,7 @@ bool isAlarm = false;
                     'Reminder',
                     style: TextStyle(
                         fontSize:14,
-                        color: isAlarm == true ? kAccentColor : kPrimaryLightColor),
+                        color: isAlarm == true ? Theme.of(context).accentColor:Colors.white),
                   ),
                 ),
   ],
