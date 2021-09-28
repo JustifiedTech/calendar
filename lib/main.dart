@@ -1,13 +1,22 @@
 
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 import '../config/import.dart';
 
+
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ],
+  );
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
+  
 static final String title = 'JTech Calendar';
   @override
   Widget build(BuildContext context) {
@@ -15,10 +24,12 @@ static final String title = 'JTech Calendar';
     return ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
       builder: (context, _) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+
         return MaterialApp(
     debugShowCheckedModeBanner:false,
           title: title,
-          themeMode: ThemeMode.dark,
+          themeMode: themeProvider.themeMode,
           darkTheme: MyThemes().darkTheme(),
           theme:MyThemes().lightTheme(),
           home: HijiriCalendar(),

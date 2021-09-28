@@ -1,68 +1,70 @@
 import '../config/import.dart';
 
-
 class ThemeProvider extends ChangeNotifier {
-ThemeMode themeMode = ThemeMode.dark;
+  ThemeMode themeMode = ThemeMode.system;
 
-bool get isDark => themeMode == ThemeMode.dark;
+  int firstDay = 1;
+  bool showWeekNumber = true;
 
+  bool get isOn => showWeekNumber;
+
+  String get currentTheme => themeMode == ThemeMode.dark
+      ? 'Dark'
+      : themeMode == ThemeMode.light
+          ? 'Light'
+          : 'System';
+
+  String get currentFirstDay => firstDay == 1 ? 'Fe' : 'We';
+
+  void showWeek(bool isTrue) {
+    showWeekNumber = isTrue ? true : false;
+    notifyListeners();
+  }
+
+  void changeTheme(String value) {
+    switch (value) {
+      case 'System':
+        themeMode = ThemeMode.system;
+        break;
+      case 'Light':
+        themeMode = ThemeMode.light;
+        break;
+      case 'Dark':
+        themeMode = ThemeMode.dark;
+        break;
+    }
+    notifyListeners();
+  }
+
+  void firstDayToggle(String value) {
+    firstDay = (value == 'Fe') ? 1 : 7;
+    notifyListeners();
+
+  }
 }
 
+class MyThemes {
+  ThemeData lightTheme() {
+    return ThemeData(
+        fontFamily: 'Muli',
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: Colors.white,
+        accentColor: Colors.deepPurpleAccent,
+        primaryColor: Colors.deepPurple,
+        colorScheme: ColorScheme.light(),
+        brightness: Brightness.light,
+        iconTheme: IconThemeData(color: Colors.black));
+  }
 
-class MyThemes{
-
-
-ThemeData lightTheme() {
-  return ThemeData(
-      fontFamily: 'Muli',
-
-      // appBarTheme: appBarTheme(),
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      scaffoldBackgroundColor: Colors.white,
-      accentColor: Colors.deepOrangeAccent,
-      primaryColor: Colors.deepPurple,
-      colorScheme: ColorScheme.light(),
-      brightness: Brightness.light,
-
-      );
-}
-ThemeData darkTheme() {
-  return ThemeData(
-      fontFamily: 'Muli',
-      // textTheme: textTheme(),
-      // appBarTheme: appBarTheme(),
-      visualDensity: VisualDensity.adaptivePlatformDensity,
-      scaffoldBackgroundColor: kPrimaryDarkColor,
-      accentColor: kAccentColor,
-      primaryColor: kPrimaryColor,
-      colorScheme: ColorScheme.dark(),
-      brightness: Brightness.dark,
-      textTheme: Typography.whiteMountainView
-
-
-      );
-}
-
-// AppBarTheme appBarTheme() {
-//   return AppBarTheme(
-
-//       elevation: 0,
-//       brightness: Brightness.light,
-//       iconTheme: IconThemeData(
-//         color: kPrimaryLightColor,
-//       ),
-//       textTheme: TextTheme(
-
-//           headline6: TextStyle(
-//             fontFamily: 'Muli',
-//               color: kTextTheme, fontSize: 20, fontWeight: FontWeight.bold)));
-// }
-
-// TextTheme textTheme() {
-//   return TextTheme(
-
-//     bodyText1: TextStyle(color: kTextColor, fontFamily: 'Muli'),
-//     bodyText2: TextStyle(color: kTextColor, fontFamily: 'Muli'),
-//   );
-// }
+  ThemeData darkTheme() {
+    return ThemeData(
+        fontFamily: 'Muli',
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        scaffoldBackgroundColor: kPrimaryDarkColor,
+        accentColor: kAccentColor,
+        primaryColor: kPrimaryColor,
+        colorScheme: ColorScheme.dark(),
+        brightness: Brightness.dark,
+        iconTheme: IconThemeData(color: Colors.white));
+  }
 }

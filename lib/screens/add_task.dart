@@ -17,17 +17,19 @@ class _AddTaskState extends State<AddTask> {
 @override
 Widget build(BuildContext context)=>
 SafeArea(child: Scaffold(
-  floatingActionButton: FloatingActionButton(child: Icon(Icons.save), onPressed: (){}, backgroundColor: Theme.of(context).accentColor, foregroundColor: kPrimaryLightColor,),
+  // floatingActionButton: FloatingActionButton(child: Icon(Icons.save), onPressed: (){}, backgroundColor: Theme.of(context).accentColor, foregroundColor: kPrimaryLightColor,),
   appBar: AppBar(
-    leading: Icon(Icons.close),
+    title: Text('Setting'), centerTitle: true,
     actions:[
-      Icon(Icons.check)
+      // Icon(Icons.check)
     ]
   ),
   body: Container(
     child:Stack(
       children: [
-        Center(child: Text('Add Task'),),
+        Center(
+              child: Text('Setting'),
+            ),
 
       ],
     )

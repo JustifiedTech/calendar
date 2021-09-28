@@ -1,7 +1,9 @@
 import '../config/import.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:url_launcher/url_launcher.dart';
 
 class MyDrawer extends StatefulWidget {
-
   const MyDrawer({
     Key? key,
   }) : super(key: key);
@@ -11,163 +13,220 @@ class MyDrawer extends StatefulWidget {
 }
 
 class _MyDrawerState extends State<MyDrawer> {
-bool isTask = false;
-bool isAlarm = false;
+  List<String> themes = ['System', 'Dark', 'Light'];
+  List<String> days = ['We', 'Fe'];
+
+  Future<void> _contact(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    
 
     return Drawer(
-
-
-  child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CircleAvatar(
-                        radius: 20,
-                        child: Icon(Icons.person, size: 30,)),
-                      InkWell(child: Icon(Icons.arrow_back_sharp, color:Colors.white,), onTap: ()=>{
-                        Navigator.pop(context)
-                      },)
-                    ],
-                  ),
-                  Text('JTech Calender', style: TextStyle( color:Colors.white, fontFamily: 'Muli', fontWeight: FontWeight.bold, fontSize: 28),),
-                  Row(
-
-                    children: [
-                      Icon(Icons.mail, size: 14, color: Colors.white,),
-                        SizedBox(width: 10,),
-
-                      Text('JustifiedTech@gmail.com', style: TextStyle(color: Colors.white),),
-
-                    ],
-                  ),
-                    Row(
-                      children: [
-                        Icon(Icons.phone, size: 14,color: Colors.white),
-                        SizedBox(width: 10,),
-                      Text('+234-703-783-7788', style: TextStyle(color: Colors.white))
-
-                      ],
-                    ),
-                ],
-              ),
-              decoration: BoxDecoration(
-                color: Theme.of(context).primaryColor,
-              ),
-            ),
-
-           MyListTile(icon:Icons.calendar_view_day_sharp, title: 'Day', onTap: () => {print('Day View')}, subtitle: '',),
-           MyListTile(icon:Icons.calendar_view_week_sharp, title: 'Week', subtitle: '', onTap: () => {print('week View')}),
-           MyListTile(icon:Icons.calendar_view_month_sharp, title: 'Month', subtitle: '', onTap: () => {print('month View')}),
-
-            Divider(height: 5, color: Theme.of(context).accentColor,),
-            Container(
-              child: Row(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-               Checkbox(
-                        activeColor: Theme.of(context).primaryColor,
-                        value: isTask,
-                        onChanged: (val) {
-                          setState(() {
-                            isTask = val!;
-                          });
-                        },
-                      ),
-                      InkWell(
-                    onTap: () {
-                      setState(() {
-                        isTask = !isTask;
-                        if(isTask){
-                        print('Task displayed');
-                      }
-                      else{
-                        print('Task display off');
-                      }
-                      });
-
-                    },
-                    child: Text(
-                      'Tasks',
-                      style: TextStyle(
-                          fontSize:14,
-                          color: isTask == true ? Theme.of(context).accentColor : Colors.white),
-                    ),
-                  ),
-  ],
-),
-            ),
-            Row(
-               children: [
-             Checkbox(
-                      activeColor: Theme.of(context).primaryColor,
-                      value: isAlarm,
-                      onChanged: (val) {
-                        setState(() {
-                          isAlarm = val!;
-                           if(isAlarm){
-                      print('Alarm displayed');
-                    }
-                    else{
-                      print('Alarm display off');
-                    }
-                        });
-
-                      },
-                    ),
+                    CircleAvatar(
+                        radius: 20,
+                        child: Icon(
+                          Icons.person,
+                          size: 30,
+                        )),
                     InkWell(
-                  onTap: () {
-                    setState(() {
-                      isAlarm = !isAlarm;
-                    });
-                  },
-                  child: Text(
-                    'Reminder',
-                    style: TextStyle(
-                        fontSize:14,
-                        color: isAlarm == true ? Theme.of(context).accentColor:Colors.white),
+                      child: Icon(
+                        Icons.arrow_back_sharp,
+                        color: Colors.white,
+                      ),
+                      onTap: () => {Navigator.pop(context)},
+                    )
+                  ],
+                ),
+                SelectableText(
+                  'JTech Calendar',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Muli',
+                      fontWeight: FontWeight.bold,
+                      fontSize: 28),
+                ),
+                GestureDetector(
+                  onTap: () => _contact(
+                      'mailto:justifiedtechnologies.com@gmail.com?subject=Enquiries&body=Your Message Here'),
+
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.mail,
+                        size: 14,
+                        color: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'JustifiedTech@gmail.com',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ],
                   ),
                 ),
-  ],
-),
-            Divider(height: 5, color: kAccentColor,),
+                GestureDetector(
+                  onTap: () => _contact('tel:07037837788'),
+                  child: Row(
+                    children: [
+                      Icon(Icons.phone, size: 14, color: Colors.white),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text('+234-703-783-7788',
+                          style: TextStyle(color: Colors.white))
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+          Divider(
+            height: 5,
+            color: Theme.of(context).accentColor,
+          ),
+          ListTile(
+            onTap: () {},
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            trailing: Icon(Icons.arrow_drop_down_sharp),
+          ),
+          Divider(
+            height: 3,
+            color: Theme.of(context).accentColor,
+          ),
+          Container(
+            padding: EdgeInsets.only(left: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Show week number'),
+                Switch.adaptive(
+                    activeColor: Theme.of(context).accentColor,
+                    value: themeProvider.isOn,
+                    onChanged: (value) async {
+                      final provider =
+                          Provider.of<ThemeProvider>(context, listen: false);
+                      SharedPreferences _prefs =
+                          await SharedPreferences.getInstance();
+                      _prefs.setBool('showWeek', value);
 
-           MyListTile(icon:Icons.settings, title: 'Settings', subtitle: 'Display Settings',),
-
-          ],
-        ),
-
-);
+                      provider.showWeek(value);
+                    })
+              ],
+            ),
+          ),
+          Divider(
+            height: 5,
+            color: Theme.of(context).accentColor,
+          ),
+       
+          ListTile(
+            title: Text('Theme'),
+            subtitle: Text(themeProvider.currentTheme),
+            onTap: () => _changeThemeDialog(context),
+          ),
+          Divider(
+            height: 5,
+            color: Theme.of(context).accentColor,
+          ),
+          ListTile(
+            title: Text('First day of the week'),
+            subtitle: Text(themeProvider.currentFirstDay.toString()),
+            onTap: () => _changeFirstDayDialog(context),
+          ),
+          Divider(
+            height: 5,
+            color: Theme.of(context).accentColor,
+          ),
+        ],
+      ),
+    );
   }
-}
 
-class MyListTile extends StatelessWidget {
-  const MyListTile({
-    Key? key, required this.icon, this.subtitle, this.title, this.onTap
-  }) : super(key: key);
+  _changeThemeDialog(BuildContext context) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    final provider = Provider.of<ThemeProvider>(context, listen: false);
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              key: ValueKey(1),
+              content: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ...themes
+                        .map((theme) => RadioListTile<String>(
+                            title: Text(theme),
+                            activeColor: Theme.of(context).accentColor,
+                            value: theme,
+                            groupValue: provider.currentTheme,
+                            selected: provider.currentTheme == theme,
+                            onChanged: (value) async {
+                              _prefs.setString('theme', value.toString());
+                              provider.changeTheme(value.toString());
+                              Navigator.of(context).pop();
+                            }))
+                        .toList()
+                  ],
+                ),
+              ),
+            ));
+  }
 
-  final String? title, subtitle;
-  final IconData icon;
-  final Function()? onTap;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: Icon(icon,),
-       title: Text(title!, style: TextStyle(fontFamily:'Muli', fontSize: 16,  fontWeight: FontWeight.bold),),
-       subtitle: Text(subtitle!, style: TextStyle(fontSize: 12),),
-      //  trailing: Icon(Icons.arrow_drop_down),
-onTap: onTap,
-     );
+  _changeFirstDayDialog(BuildContext context) async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    final provider = Provider.of<ThemeProvider>(context, listen: false);
+    return showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              key: ValueKey(2),
+              content: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ...days
+                        .asMap()
+                        .entries
+                        .map((day) => RadioListTile<String>(
+                            title: Text(day.value),
+                            activeColor: Theme.of(context).accentColor,
+                            value: day.value,
+                            groupValue: provider.currentFirstDay,
+                            selected: provider.currentFirstDay == day.value,
+                            onChanged: (value) async {
+                              _prefs.setString('firstDay', value.toString());
+                              provider.firstDayToggle(value.toString());
+                              Navigator.of(context).pop();
+                            }))
+                        .toList()
+                  ],
+                ),
+              ),
+            ));
   }
 }
