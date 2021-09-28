@@ -5,8 +5,8 @@ description: Hijri Calendar.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
-# --build-name:
-# --build-number:
+--build-name: 'beta-1.0'
+--build-number: 1.0.0+1
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
@@ -17,21 +17,24 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
-  # syncfusion_flutter_calendar: ^19.2.60
   syncfusion_flutter_datepicker: ^19.2.60
-  # hawk_fab_menu: ^0.3.2
   provider: ^5.0.0
-  get: ^4.3.4
   shared_preferences: 
-  # flutter_native_splash: ^1.1.7
   url_launcher: ^6.0.4
-  flutter_launcher_icons: 
   
-  # flutter_staggered_grid_view: ^0.4.0
-  # table_calendar: ^3.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: 
+  
+
+
+flutter_icons:
+ android: true
+ ios: true
+ image_path: "assets/images/justifiedtech.png"
+ adaptive_icon_background: "#ffffff"
+ adaptive_icon_foreground: "assets/images/justifiedtech.png"
 
 flutter:
   uses-material-design: true
