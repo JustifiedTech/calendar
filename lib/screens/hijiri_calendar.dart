@@ -1,6 +1,8 @@
 // import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 
+// ignore_for_file: deprecated_member_use
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/import.dart';
@@ -82,6 +84,7 @@ class _HijiriCalendarState extends State<HijiriCalendar> {
   void dispose() {
     super.dispose();
     // callTheme();
+    
 
   }
 
@@ -235,8 +238,13 @@ class _HijiriCalendarState extends State<HijiriCalendar> {
         ? true
         : false;
 
-    if (_controller.view == HijriDatePickerView.month) {
-      return Container(
+
+        
+
+       
+
+    return _controller.view == HijriDatePickerView.month
+        ? Container(
         width: cellDetails.bounds.width,
         height: cellDetails.bounds.height,
         alignment: Alignment.center,
@@ -253,10 +261,10 @@ class _HijiriCalendarState extends State<HijiriCalendar> {
                     width: 3),
                 shape: BoxShape.circle)
             : null,
-      );
-    } else if (_controller.view == HijriDatePickerView.year ||
-        _controller.view == HijriDatePickerView.month) {
-      return Container(
+      )
+        : (_controller.view == HijriDatePickerView.year ||
+                _controller.view == HijriDatePickerView.month)
+            ? Container(
         width: cellDetails.bounds.width,
         height: cellDetails.bounds.height,
         alignment: Alignment.center,
@@ -270,26 +278,29 @@ class _HijiriCalendarState extends State<HijiriCalendar> {
               )
             : null,
         child: Text(monthsName[cellDetails.date.month]),
-      );
-    } else if (_controller.view == HijriDatePickerView.decade ||
+      )
+            : (_controller.view == HijriDatePickerView.decade ||
         _controller.view == HijriDatePickerView.year ||
-        _controller.view == HijriDatePickerView.month) {
-      return Container(
+        _controller.view == HijriDatePickerView.month)
+                ? Container(
         width: cellDetails.bounds.width,
         height: 300,
         alignment: Alignment.center,
         child: Text(cellDetails.date.year.toString()),
-      );
-    } else {
-      final int yearValue = (cellDetails.date.year ~/ 10) * 10;
-      return Container(
+      )
+                :
+                // final int yearValue = (cellDetails.date.year ~/ 10) * 10;
+                Container(
         color: Colors.grey,
         width: cellDetails.bounds.width,
         height: 300,
         alignment: Alignment.center,
-        child: Text(yearValue.toString() + ' to ' + (yearValue + 9).toString()),
+        child: Text(((cellDetails.date.year ~/ 10) * 10)
+                            .toString() +
+                        ' to ' +
+                        (((cellDetails.date.year ~/ 10) * 10) + 9).toString()),
       );
-    }
+    
   }
 
   HijriDatePickerMonthCellStyle monthCellStyle() {

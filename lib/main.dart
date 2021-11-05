@@ -17,7 +17,7 @@ void main() {
 class MyApp extends StatelessWidget {
 
   
-static final String title = 'JTech Calendar';
+static final String title = 'Taju';
   @override
   Widget build(BuildContext context) {
 

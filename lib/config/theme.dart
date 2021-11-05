@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import '../config/import.dart';
 
 class ThemeProvider extends ChangeNotifier {
