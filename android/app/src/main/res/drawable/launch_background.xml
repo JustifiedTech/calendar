@@ -14,3 +14,7 @@
             android:src="@mipmap/launch_image" />
     </item>
 </layer-list>
+<item>
+  <color android:color="@color/splash" />
+  
+  </item>
